@@ -20,8 +20,8 @@ from django.urls import path, include
 # from news import views as news_views
 
 urlpatterns = [
-    path("", include("news.urls"), name="news-urls"),
     path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+    path("", include("news.urls"), name="news-urls"),
     # path('news/', news_views.my_news, name="news"),  # the top urls are loaded as the main urls
-    # path('summernote/', include('django_summernote.urls')),
 ]
