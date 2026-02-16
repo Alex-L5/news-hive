@@ -9,7 +9,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    url = models.URLField()
+    # url = models.URLField()
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="news_posts"
     )                                                               # This is a one-to-many or Foreign Key
@@ -24,9 +24,9 @@ class Post(models.Model):
     class Meta:
         ordering = ["-created_on"]
 
-    @property
-    def score(self):
-        return self.upvotes - self.downvotes
+    # @property
+    # def score(self):
+        # return self.upvotes - self.downvotes
 
         def __str__(self):
             return f"{self.title} | written by {self.author}"  # def __str__(self):
@@ -50,9 +50,9 @@ class Comment(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
-    parent = models.ForeignKey(
-        'self', null=True, blank=True, on_delete=models.CASCADE
-    )
+    # parent = models.ForeignKey(
+        # 'self', null=True, blank=True, on_delete=models.CASCADE
+    # )
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
