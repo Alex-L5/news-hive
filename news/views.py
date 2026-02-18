@@ -1,4 +1,4 @@
-from django.shortcuts import render  # , redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404  # , redirect, get_object_or_404
 # from django.http import HttpResponse
 from django.views import generic
 from .models import Post
@@ -6,6 +6,38 @@ from .models import Post
 # import json
 # import os
 # from django.shortcuts import render
+
+# Create your views here.
+class PostList(generic.ListView):
+    queryset = Post.objects.all()
+    # template_name = "post_list.html"  # no difference whether you have the line commented out or not
+# def news(request):
+    # return HttpResponse("Hello, news!")
+    template_name = "news/index.html"
+    paginate_by = 6
+
+def post_detail(request, slug):
+    """
+    Display an individual :model:`news.Post`.
+
+    **Context**
+
+    ``post``
+        An instance of :model:`news.Post`.
+
+    **Template:**
+
+    :template:`news/post_detail.html`
+    """
+
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+
+    return render(
+        request,
+        "news/post_detail.html",
+        {"post": post},
+    )
 
 # def load_posts():
     # file_path = os.path.join(os.path.dirname(__file__), 'news_data.json')
@@ -34,14 +66,3 @@ from .models import Post
     # post.score += 1
     # post.save()
     # return redirect('home')                 # 'index'
-
-# Create your views here.
-
-
-class PostList(generic.ListView):
-    queryset = Post.objects.all()
-    # template_name = "post_list.html"  # no difference whether you have the line commented out or not
-# def news(request):
-    # return HttpResponse("Hello, news!")
-    template_name = "news/index.html"
-    paginate_by = 6
