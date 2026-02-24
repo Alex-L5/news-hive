@@ -31,14 +31,14 @@ def post_detail(request, slug):
     """
 
     queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
+    post = get_object_or_404(queryset, slug=slug)  # we use the shortcut, get_object_or_404() to get data or raise a Http404 error if the data object does not exist       
 
-    return render(
+    return render(                          
         request,
         "news/post_detail.html",
         {"post": post},
-    )
-
+    )                                               # we use render() as a shortcut to load data to a template and return it (returning the contents of a webpage containing one post)
+                                                    
 # def load_posts():
     # file_path = os.path.join(os.path.dirname(__file__), 'news_data.json')
     # with open(file_path, 'r') as file:
