@@ -1,68 +1,56 @@
-from django.shortcuts import render, get_object_or_404  # , redirect, get_object_or_404
-# from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.contrib import messages
 from .models import Post
-# from django.contrib.auth.decorators import login_required
-# import json
-# import os
-# from django.shortcuts import render
+from .forms import CommentForm
 
 # Create your views here.
 class PostList(generic.ListView):
-    queryset = Post.objects.all()
-    # template_name = "post_list.html"  # no difference whether you have the line commented out or not
-# def news(request):
-    # return HttpResponse("Hello, news!")
+    queryset = Post.objects.filter(status=1)
     template_name = "news/index.html"
     paginate_by = 6
 
+
 def post_detail(request, slug):
     """
-    Display an individual :model:`news.Post`.
+    Display an individual :model:`blog.Post`.
 
     **Context**
 
     ``post``
-        An instance of :model:`news.Post`.
+        An instance of :model:`blog.Post`.
 
     **Template:**
 
-    :template:`news/post_detail.html`
+    :template:`blog/post_detail.html`
     """
 
     queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)  # we use the shortcut, get_object_or_404() to get data or raise a Http404 error if the data object does not exist       
+    post = get_object_or_404(queryset, slug=slug)
+    comments = post.comments.all().order_by("-created_on")
+    comment_count = post.comments.filter(approved=True).count()
 
-    return render(                          
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
+
+    comment_form = CommentForm()
+
+    return render(
         request,
         "news/post_detail.html",
-        {"post": post},
-    )                                               # we use render() as a shortcut to load data to a template and return it (returning the contents of a webpage containing one post)
-                                                    
-# def load_posts():
-    # file_path = os.path.join(os.path.dirname(__file__), 'news_data.json')
-    # with open(file_path, 'r') as file:
-        # posts = json.load(file)
-    # return posts
-
-# def index(request):
-    # posts = load_posts()
-    # posts = sorted(posts, key=lambda x: x['votes'], reverse=True)
-    # return render(request, 'news/index.html', {'posts': posts})
-
-# def post_detail(request, post_id):
-    # post = get_object_or_404(Post, id=post_id)
-    # comments = post.comment_set.all()
-    # posts = load_posts()
-    # post = next((p for p in posts if p["id"] == post_id), None)
-    # return render(request, 'news/post_detail.html', {
-        # 'post': post,
-        # 'comments': comments
-    # })                                     # return render(request, 'news/post_detail.html', {'posts': posts})
-
-# @login_required
-# def upvote_post(request, post_id):
-    # post = get_object_or_404(Post, id=post_id)
-    # post.score += 1
-    # post.save()
-    # return redirect('home')                 # 'index'
+        {
+            "post": post,
+            "comments": comments,
+            "comment_count": comment_count,
+            "comment_form": comment_form,
+        },
+    )

@@ -20,7 +20,7 @@ from django.urls import path, include
 # from news import views as news_views
 
 urlpatterns = [
-    path("about/", include("about.urls"), name="about-urls"), # ordered alphabetically
+    path("about/", include("about.urls"), name="about-urls"),  # ordered alphabetically
     path("accounts/", include("allauth.urls")),
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
