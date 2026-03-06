@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}  <!-- {% %} is what we call a tag. Tags are more complex than variables -->     
+{% block content %}  <!-- the curly bracket, percentage combination is what we call a tag. Tags are more complex than variables -->     
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="image-container">
                                 <div class="image-flash">
-                                    <p class="author">Author: {{ post.author }}</p>  <!-- {{ }} indicates a variable -->
+                                    <p class="author">Author: {{ post.author }}</p>  <!-- the curly bracket combination indicates a variable -->
                                 </div>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:3 %}  <!-- takes the forloop.counter variable and filters (divides) it by 3 (calculator) -->
+                {% if forloop.counter|divisibleby:3 %}  <!-- takes the forloop, counter variable and filters (divides) it by 3 (calculator) -->
             </div>
             <div class="row">
                 {% endif %}
@@ -58,5 +58,5 @@
 <!-- index.html content ends here -->
 {% endblock %}
 {% block copyright %}
-    Copyright 2023 Alex Menkiti
+    Copyright 2026 Alex Menkiti
 {% endblock %}

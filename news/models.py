@@ -28,8 +28,8 @@ class Post(models.Model):
     # def score(self):
         # return self.upvotes - self.downvotes
 
-        def __str__(self):
-            return f"{self.title} | written by {self.author}"  # def __str__(self):
+    def __str__(self):
+        return f"{self.title} | written by {self.author}"  # def __str__(self):
                                                                    # return self.title
 
         # def loaddata(filepath):
