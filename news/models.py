@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User  # Import models to connect
+from cloudinary.models import CloudinaryField
 # import json
 # from posts.models import Post
 
@@ -13,6 +14,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="news_posts"
     )                                                               # This is a one-to-many or Foreign Key
+    featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()                                    # This is the news article content
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -69,4 +71,3 @@ class Comment(models.Model):
 
     # def __str__(self):
         # return f"Comment by {self.author}"
-
