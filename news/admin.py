@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
+from .models import Post, Comment
 # from .models import Blog
 
 # @admin.register(Blog)
@@ -10,10 +10,14 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
+    """
+    Lists fields for display in admin, fileds for search,
+    field filters, fields to prepopulate and rich-text editor.
+    """
 
-    list_display = ('title', 'slug', 'status', 'created_on',)
+    list_display = ('title', 'slug', 'status', 'created_on',)  # 'created_on'
     search_fields = ['title', 'content']
-    list_filter = ('status', 'created_on',)
+    list_filter = ('status', 'created_on',)  # 'created_on'
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
 
