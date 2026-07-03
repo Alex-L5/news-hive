@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container flex-center flex-column">
+  <h1>Page not found</h1>
+  <p>Sorry, the page you tried to visit does not exist.</p>
+  <div class="error-button-wrapper">
+    <a class="button" href="{% url 'home' %}">Go to homepage</a>
+  </div>
+</section>
+{% endblock content %}
