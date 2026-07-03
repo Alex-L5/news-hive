@@ -49,6 +49,8 @@
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
+    <!-- Header -->
+    <header>
     <i class="fa-solid fa-car"></i>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -108,7 +110,8 @@
             </div>
         </div>
     </div>
-
+    </header>
+    <!-- Main body -->
     <main class="flex-shrink-0 main-bg">
         {% if user.is_authenticated %}
         <p class="text-end m-3">You are logged in as {{ user }}</p>
