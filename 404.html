@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="container flex-center flex-column">
-  <h1>Page not found</h1>
-  <p>Sorry, the page you tried to visit does not exist.</p>
+<section class="error-section text-center">
+  <h2>400 - Bad Request</h2>
+  <p class="error-400-text">Oops! Something went wrong.</p>
   <div class="error-button-wrapper">
-    <a class="button" href="{% url 'home' %}">Go to homepage</a>
+    <a class="button" href="{% url 'home' %}">Go back home</a>
   </div>
 </section>
 {% endblock content %}
