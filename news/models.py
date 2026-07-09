@@ -19,8 +19,8 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="news_posts"
     )                               # This is a one-to-many or Foreign Key
-    featured_image = CloudinaryField('image', default='placeholder')
-    content = models.TextField()
+    featured_image = CloudinaryField('image', default='placeholder')  # Unique lightweight URL pointing to the image is saved here
+    content = models.TextField()  # This is the news article content
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
@@ -37,7 +37,19 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"  # def __str__(self):
+                                                                   # return self.title 
 
+# def loaddata(filepath):
+
+        # with open('news_posts.json', 'r') as f:
+            # data = json.load(f)
+        # for item in data:
+            # Post.objects.create(
+                # title=item['title'],
+                # content=item['content'],
+                # excerpt=item['excerpt']
+# parent = models.ForeignKey(
+        # 'self', null=True, blank=True, on_delete=models.CASCADE
 
 class Comment(models.Model):
     """
@@ -45,15 +57,15 @@ class Comment(models.Model):
     and :model:`blog.Post`.
     """
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments")
+        Post, on_delete=models.CASCADE, related_name="comments")  # return self.content[:30]
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter")
-    body = models.TextField()
-
-    approved = models.BooleanField(default=False)
+        User, on_delete=models.CASCADE, related_name="commenter")  # post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)  
+    body = models.TextField()                                      # author = models.ForeignKey(User, on_delete=models.CASCADE) 
+                                                                   # content = models.TextField() 
+    approved = models.BooleanField(default=False)                  # created_at = models.DateTimeField(auto_now_add=True) 
     created_on = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
+                                                                   # def __str__(self): 
+    class Meta:                                                        # return f"Comment by {self.author}" 
         ordering = ["created_on"]
 
     def __str__(self):

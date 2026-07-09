@@ -16,7 +16,7 @@ def about_me(request):
         The most recent instance of :model:`about.About`.
         ``collaborate_form``
             An instance of :form:`about.CollaborateForm`.
-    
+
     **Template**
     :template:`about/about.html`
     """
@@ -26,7 +26,7 @@ def about_me(request):
         if collaborate_form.is_valid():
             collaborate_form.save()
             messages.add_message(
-                request, 
+                request,
                 messages.SUCCESS,
                 "Collaboration request received! I endeavour to respond within 2 working days."
             )
@@ -38,7 +38,7 @@ def about_me(request):
         request,
         "about/about.html",
         {
-            "about": about,                         # the new about object is passed into the context
+            "about": about,  # the new about object is passed into the context
             "collaborate_form": collaborate_form
         },
-    )                               
+    )       
