@@ -14,7 +14,7 @@ class About(models.Model):
     content = models.TextField()
 
     def __str__(self):
-        return self.title   # the __str__ magic method is added to the model to make sure it returns the title
+        return self.title  # the __str__ magic method is added to the model to make sure it returns the title
 
 
 class CollaborateRequest(models.Model):
@@ -27,5 +27,4 @@ class CollaborateRequest(models.Model):
     read = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Collaboration request from {self.name}"   
-                                
+        return f"Collaboration request from {self.name}"
