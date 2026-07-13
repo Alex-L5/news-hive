@@ -35,7 +35,7 @@ class TestNewsViews(TestCase):
             'body': 'This is a test comment.'
         }                                                   # post_data dictionary, contains the data posted to the database
         response = self.client.post(reverse(
-            'post_detail', args=['news']), post_data)  # POST request, with self.client.post method
+            'post_detail', args=['news-title']), post_data)  # POST request, with self.client.post method
         self.assertEqual(response.status_code, 200)
         self.assertIn(
             b'Comment submitted and awaiting approval',  # b, syntax for creating byte strings as per internet data format
