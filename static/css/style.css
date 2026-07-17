@@ -185,3 +185,25 @@ textarea:focus-visible,
 
 /* Media queries */
 
+/* Media query: Small devices (mobile phones and tablets, 320px and up) */
+@media screen and (max-width: 503px) {
+    .btn {
+        width: min(90vw, 28rem);
+        min-height: 44px;
+        padding: 1rem;
+        font-size: 1.6rem;
+    }
+}
+
+/* large or landscape phones (576px and up) */
+@media screen and (min-width: 576px) 
+
+/* tablets and larger (768px and up) */
+@media screen and (min-width: 768px) 
+
+/* large devices (laptops and desktops, 992px and up) */
+@media screen and (min-width: 992px) 
+
+@media screen and (min-width: 1200px) 
+
+@media screen and (min-width: 1440px) 
