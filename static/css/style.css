@@ -173,17 +173,15 @@ body {
     color: rgb(222, 146, 168);
 }
  
+/* Focus styles for accessibility */ 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 3px;
+}
+
 /* Media queries */
 
-/* large or landscape phones (576px and up) */
-@media screen and (min-width: 576px)
-
-/* tablets and larger (768px and up) */
-@media screen and (min-width: 768px)
-
-/* large devices (laptops and desktops, 992px and up) */
-@media screen and (min-width: 992px)
-
-@media screen and (min-width: 1200px)
-
-@media screen and (min-width: 1440px)
